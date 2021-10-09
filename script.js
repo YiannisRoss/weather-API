@@ -36,14 +36,19 @@ async function populateWeatherData(location) {
 
     let weatherData = await fetchWeatherData(location)
 
+    
     let locationText = document.querySelector('h1')
+    if (weatherData.cod == '404') {
+        locationText.innerHTML = weatherData.message
+        return
+    }
     locationText.innerHTML = weatherData.name
 
     temperature = document.getElementById('temperature')
     temperature.innerHTML = weatherData.main.temp + ' Celsius'
 
     feelsLike = document.getElementById('feels-like')
-    feelsLike.innerHTML = 'Feels like ' + weatherData.main.feels_like + 'Celsius'
+    feelsLike.innerHTML = 'Feels like ' + weatherData.main.feels_like + ' Celsius'
 
     humidity = document.getElementById('humidity')
     humidity.innerHTML = weatherData.main.humidity + '%'
