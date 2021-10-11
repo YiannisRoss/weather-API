@@ -6,7 +6,7 @@ async function fetchWeatherData(location) {
 
     console.log('fetching weather data')
 
-    response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=c228b4d1108390877c1a32b9560bde5b&units=metric`)
+    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=c228b4d1108390877c1a32b9560bde5b&units=metric`)
     response = response.json()
     console.log(response)
 
