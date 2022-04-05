@@ -1,41 +1,26 @@
-console.log('script loaded')
-
-let response
-
-async function fetchWeatherData(location) {
-
-    console.log('fetching weather data')
-
-    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=c228b4d1108390877c1a32b9560bde5b&units=metric`)
-    response = response.json()
-    console.log(response)
-
-    return response
-}
-
-
-
-
 let searchForm = document.getElementById('location-form')
+
 searchForm.addEventListener('submit', function(event) {
     let city = searchForm.city.value
-
-    console.log(`submitting for ${city}`)
     event.preventDefault()
     populateWeatherData(city)
-
 } )
 
 
 
 
+async function fetchWeatherData(location) {
+    
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=c228b4d1108390877c1a32b9560bde5b&units=metric`)
+    response = response.json()
+
+    return response
+}
+
 
 async function populateWeatherData(location) {
 
-    console.log(`populating for ${location}`)
-
     let weatherData = await fetchWeatherData(location)
-
     
     let locationText = document.querySelector('h1')
     if (weatherData.cod == '404') {
@@ -53,9 +38,9 @@ async function populateWeatherData(location) {
     humidity = document.getElementById('humidity')
     humidity.innerHTML = weatherData.main.humidity + '%'
 
-
     pressure = document.getElementById('pressure')
     pressure.innerHTML = weatherData.main.pressure + ' hPa'
-
 }
+
+
 
